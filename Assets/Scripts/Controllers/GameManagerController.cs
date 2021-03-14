@@ -9,7 +9,7 @@ public class GameManagerController : MonoBehaviour
 
     public GameController gameController;
 
-
+    // Singleton pattern to control flow of information
     #region SINGLETON PATTERN
     private static GameManagerController _instance;
     public static GameManagerController Instance

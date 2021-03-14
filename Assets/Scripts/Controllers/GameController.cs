@@ -26,43 +26,34 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Set Cursor to be visible
         CursorVisible();
-        int i = 0;
+
+        // Spawn cube on start
         if(spawnLocations != null)
         {
             foreach(var obj in cubePrefabs)
             {
                 SpawnCube(obj,0f);
             }
-
         }
         
     }
 
+    // Set Cursor to be Visible
     public void CursorVisible()
     {
         
         Cursor.visible = true;
     }
 
+    // Set Cursor to be Invisble
     public void CursorInVisible()
     {
         Cursor.visible = false;
     }
 
-    void FindObject()
-    {
-        RaycastHit hit;
-        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-        
-        if (Physics.Raycast(ray, out hit)) {
-            Transform objectHit = hit.transform;
-            Debug.Log(hit.collider.gameObject.name);
-            
-            // Do something with the object that was hit by the raycast.
-        }
-    }
-
+    // Spawn the cube at it sepcified location
     public void SpawnCube(GameObject obj, float duration = 7f)
     {
        
@@ -85,6 +76,7 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
+        // Get Escape Input
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             foreach(var obj in instatiatedPrefabs)
@@ -94,12 +86,14 @@ public class GameController : MonoBehaviour
             CursorVisible();
         }
 
+        // Get 'M' Input
         if (Input.GetKeyDown(KeyCode.M))
         {
             GoGokuMode(!GoGoku);
         }
     }
 
+    // SPawn objects after 7 seconds
     IEnumerator SpawnObject(GameObject obj, Transform loaction, float duration = 7f)
     {
         yield return new WaitForSeconds(duration);
@@ -107,17 +101,22 @@ public class GameController : MonoBehaviour
         instatiatedPrefabs.Add(tempObj);
     }
 
+    // Increment the score
     public void IncrementScore()
     {
         m_score++;
         IncreaseScore.Invoke(m_score.ToString());
     }
 
+    // Enable or Disable mode to select all cubes
     void GoGokuMode(bool goGoku)
     {
+        // change bool value
         GoGoku = goGoku;
+
         if(goGoku)
         {
+            // Mark all cubes as Active
             foreach(var obj in instatiatedPrefabs)
             {
                 obj.GetComponent<CubeScript>().isCubeActive = true;
@@ -126,6 +125,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
+            // Mark All cubes as inactive
             foreach(var obj in instatiatedPrefabs)
             {
                 obj.GetComponent<CubeScript>().isCubeActive = false;
@@ -135,7 +135,6 @@ public class GameController : MonoBehaviour
         
     }
 }
-
 
 
 public enum CubeType{
