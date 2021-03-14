@@ -2,6 +2,8 @@
 
 ## Unity Version : 2019.4.12F1
 
+### Unity Executable build placed in Builds Folder.
+
 ## Controls
 - W, A, S, D - move cube in directions. 
 - Esc - Toggle Cube Select Mode
